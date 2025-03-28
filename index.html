@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Devastator111: Weather</title>
+       <nav>
+      <a href=weather.html>Weather</a>
+      
+      </nav>
+  </head>
+  <body>
+      <button id="hello">run listener</button>
+<button id="hi">another listener</button>
+<button id="hey">remove listener</button>
+
+    <p>Make something amazing with Tynker</p>
+      <script>
+      //document.cookie = "test1=Hello; SameSite=None; Secure";
+//document.cookie = "test2=World; SameSite=None; Secure";
+//document.cookie = "test2=Hello; expires=Thu, 01 Jan 1970 00:00:00 UTC;";  
+const cookieValue = document.cookie
+  .split("; ")
+  .find((row) => row.startsWith("test2="))
+  ?.split("=")[1];
+
+function showCookieValue() {
+  const output = document.getElementById("cookie-value");
+  output.textContent = cookieValue;
+}
+
+function clearOutputCookieValue() {
+  const output = document.getElementById("cookie-value");
+  output.textContent = "";
+}
+var talk = function(word){
+alert(word);
+}
+document.getElementById("hello").addEventListener('click',function(){alert("hello")});
+document.getElementById("hi").addEventListener('click',function(){document.getElementById("hello").addEventListener('click',function(){alert("Yo")})});
+document.getElementById("hey").addEventListener('click',function(){
+    document.getElementById("hello").removeEventListener('click',function(){alert("hello")});
+});
+
+
+
+
+
+      </script>
+      
+      <button onclick="showCookieValue()">Show cookie value</button>
+
+<button onclick="clearOutputCookieValue()">Clear</button>
+
+<div>
+  <code id="cookie-value"></code>
+</div>
+  </body>
+</html>

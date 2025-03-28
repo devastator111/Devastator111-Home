@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <meta charset="utf-8">
+    <title>Devastator111: Iframe</title>
+      
+      <nav>
+        <a href=index.html>Home</a>
+        <a href=beach.html>The Beach</a>
+        <a href='weather.html'>Weather</a>
+        <a style='background-color:#ac6400' href='iframe.html'>Iframe</a>
+        <a href=Files.html>Files</a>
+      </nav>
+  </head>
+  <body>
+      <style>
+          footer{
+              margin-top:300px;
+              font-weight:400;
+              text-align:center;
+          }
+          input{
+              background-color:darkgray;
+          }
+          input:invalid{
+              color:red;
+          }
+          .fullscreen{
+              margin:0px 23px 0px 75px;
+          }
+          .close{
+              margin-right:70px;
+          }
+          .lora {
+            font-style: normal;
+            font-family: "Lora", serif;
+            
+          }
+          #backImage{
+              position:fixed;
+              z-index:-10;
+              top:0px;
+              left:0px;
+              width:100%;
+              overflow-x:hidden;
+          }
+          .sum{
+              background-color:darkgray;
+              padding:10px;
+              
+          }
+          .expand{
+              padding-bottom:10px;
+              margin-bottom:0px;
+          }
+          button{
+              background-color:#ac6400;
+              margin-left:10px;
+              border-radius:4px;
+          }
+          button:hover{
+              position:relative;
+              top:2px;
+              background-color:#ec8a00;
+          }
+          
+          nav a{
+              font-weight:700;
+              background-color:#ec8a00;
+              text-decoration:none;
+              font-size:1.1em;              
+              float:left;
+              margin:0 0px 10px 0px;
+              padding:15px;
+              color:#001dab;
+          }
+          nav a:active{
+              background-color:#7b4800;
+          }
+          .iframe:focus{
+              border:black solid 4px;
+          }
+          nav{
+              background-color:darkgray;
+              border-bottom:#ec8a00 ridge 0.6em;
+              height:3em;
+              margin:0px;
+              padding-left:45px;
+              position:relative;
+              top:-10px;
+              
+              
+          }
+          body{
+              font-weight:500;
+              font-style: normal;
+              font-family: "Lora", serif;
+              text-align:left;
+              background:#d1d1d1;
+          }
+          .title{
+              text-align:center;
+          }
+          .sub{
+              text-align:center;
+              color:#001dab;    
+              font-weight: 500;
+              background-color:darkgray;
+              padding:5px;
+              border-bottom:black solid 2px;
+          }
+          #none{
+              
+              padding-bottom:20px;
+              text-align:center;
+              margin-bottom:-10px;
+          }
+          hr{
+              height:4px;
+              border:red;
+              border-bottom:black solid 2px;
+              margin-bottom:10px;
+          }
+          #linkBlock{
+              border:black solid 2px;
+          }
+          summary button{
+              float:none
+          }
+          summary{
+              border-radius:10px;
+              margin-bottom:-11px;
+              border:black solid 2px;
+          }
+          ::placeholder{
+            opacity:0.5;
+            color:#7b4800;
+        }
+          input{
+              border-radius:4px;
+              border-color:black;
+              width:500px;
+          }
+          #links{
+              border-radius:10px;
+              border:black solid 0px;
+              padding-bottom:-10px;
+          }
+          details{
+              
+          }
+      </style>
+      
+      <h1 class='title'>Iframe Player</h1>
+      <h2 class='sub'>Active Iframes</h2>
+      <div id='activeFrames'><p id='none'>No active Iframes</p></div>
+      <div id='buttonBar'></div>
+      <hr id='rule'>
+      <span><label for="name">If you have a url, you can type it here:</label><input type="url" id="name" name="name" size="10" placeholder="https://example.com"/><button onclick='newIframeInput()'>GO</button></span>
+      <p>Otherwise, you can use one of these quick links</p>
+      <div id="links">
+      <details class='expand' name='q'><summary class='sum'>OvO<button onclick='copyText("https://www.coolmathgames.com/sites/default/files/public_games/49389/")'>Copy Link</button><button onclick='newIframe("https://www.coolmathgames.com/sites/default/files/public_games/49389/");'>GO</button></summary>Pretty good platformer with interesting combo moves.</details>
+      <details class='expand' name='q'><summary class='sum'>xkcd<button onclick='copyText("https://xkcd.com")'>Copy Link</button><button onclick='newIframe("https://xkcd.com");'>GO</button></summary>A nerdy but funny web comic.</details>
+      <details class='expand' name='q'><summary class='sum'>Google Docs<button onclick='copyText("https://docs.google.com")'>Copy Link</button><button onclick='newIframe("https://docs.google.com/document/u/0/?tgif=d");'>GO</button></summary>A nerdy but funny web comic.</details>
+      <details class='expand' name='q'><summary class='sum'>Moto X3M<button onclick='copyText("https://www.coolmathgames.com/sites/default/files/public_games/49091/")'>Copy Link</button><button onclick='newIframe("https://www.coolmathgames.com/sites/default/files/public_games/49091/");'>GO</button></summary>"That's that racing motorbike game right?" -Mr. Taubenheim</details>
+     </div>
+      <script>
+          //https://www.coolmathgames.com/sites/default/files/public_games/49091/
+          //https://scratch.mit.edu/projects/1054544741/embed/
+          //may 9 2019
+          var currentIndex = 0;
+          var newIframeInput = function(){
+            newIframeBase(document.getElementById('name').value);
+            
+            
+              };
+          function isValidHttpUrl(string) {
+  let url;
+  
+  try {
+    url = new URL(string);
+  } catch (_) {
+    return false;  
+  }
+
+  return url.protocol === "http:" || url.protocol === "https:";
+}
+
+          var newIframe = function(url){newIframeBase(url)}
+          var newIframeBase = function(url){
+            if(isValidHttpUrl(url)){
+            var j = currentIndex.toString().concat("main");
+            var x = document.getElementById('activeFrames');
+            var y = document.getElementById('buttonBar');
+            ifram = document.createElement('IFRAME');
+            ifram.setAttribute("src",url);
+            ifram.setAttribute("id",j);
+            but = document.createElement('BUTTON');
+            but.textContent = "Fullscreen"
+            but.setAttribute("class","fullscreen");
+            closer = document.createElement('BUTTON');
+            closer.textContent = "Close"
+            closer.setAttribute("class", "close");
+            closer.setAttribute("id",j);
+            //console.log(currentIndex);
+            //console.log(j);
+            
+            if(x.childNodes[0].textContent === "No active Iframes"){
+                x.replaceChildren(ifram);
+                
+            }else{
+                x.appendChild(ifram);
+            }
+            y.appendChild(but);
+            y.appendChild(closer);
+            var currentBut = y.childNodes[y.childElementCount-2];
+            var index = Array.prototype.indexOf.call(y.children, but)/2;
+            currentIndex+=1;
+            currentBut.addEventListener('click',function(){
+                index = (Array.prototype.indexOf.call(y.children, this))/2;
+                if(currentBut.textContent==='Fullscreen'){
+                    currentBut.textContent = "Exit fullscreen";
+                    currentBut.setAttribute('style','margin-left:0px;position:absolute;top:10px;left:10px;');
+                    x.childNodes[index].setAttribute('style','position:absolute;top:0px;left:0px;width:100%;height:100%;');
+                }else{
+                    
+                    currentBut.setAttribute("style","");
+                    x.childNodes[index].setAttribute("style","");
+                    currentBut.textContent = "Fullscreen";
+                }
+            })
+            closer.addEventListener('click',function(){
+                var z = document.getElementById(closer.getAttribute("id"));
+                //console.log(closer.getAttribute("id"));
+                var myIndex = (Array.prototype.indexOf.call(y.children, this)-1)/2;
+                //console.log(myIndex);
+                x.childNodes[myIndex].remove();//Maybe use an id thats like a number that keeps going up like indexes on arras
+                y.childNodes[myIndex*2].remove();
+                y.childNodes[myIndex*2].remove();
+                if(y.childElementCount===0){
+                    noActive = document.createTextNode("No active Iframes");
+                    para = document.createElement("p");
+                    x.appendChild(para);
+                    para.replaceChildren(noActive);
+                    para.setAttribute("id","none");
+                }
+            })
+            }else{
+                alert("Please type a valid url.");
+            }
+          };
+          
+          var copyText = function(text){
+              navigator.clipboard.writeText(text);
+              alert("Successfully copied link to clipboard!");
+          }
+          details = document.getElementById('');
+          for(var j = 0; j < document.getElementsByClassName('expand').length; j++){
+            details = document.getElementsByClassName('expand')[j];
+            details.addEventListener("toggle", function(){
+                if (this.open) {
+                    //this.setAttribute('style','border-bottom:black solid 2px;margin-bottom:0px;');
+                    this.childNodes[0].setAttribute('style','margin-bottom:10px;')
+                }else {
+                    //this.setAttribute('style','border-bottom:black solid 0px;margin-bottom:0px;');
+                    this.childNodes[0].setAttribute('style','margin-bottom:-11px')
+                }
+            });
+          }
+          
+
+          
+      </script>
+
+     <!-- <iframe
+  id="inlineFrameExample"
+  title="Inline Frame Example"
+  width=100%
+  height=1000
+  src="https://www.openstreetmap.org/export/embed.html?bbox=-0.004017949104309083%2C51.47612752641776%2C0.00030577182769775396%2C51.478569861898606&amp;layer=mapnik">
+</iframe>
+-->
+    <p></p>
+  </body>
+    <footer>
+        <hr>
+    This page was created inside the STS coterie
+    </footer>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+    
+  <head>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <title>Devastator111: Home</title>
+      <nav>
+        <a href=index.html>Home</a>
+        <a href=beach.html>The Beach</a>
+        <a style='background-color:#ac6400' href='weather.html'>Weather</a>
+        <a href='iframe.html'>Iframe</a>
+        <a href=Files.html>Files</a>
+      </nav>
+  </head>
+  <body>
+    <!--<h1 class='lora' id='title'>Weather</h1>-->
+    <h1 id='sub'>Weekly Forecast</h1>
+    <hr>
+    <p id='replaceMe'>Weather did not pull.</p>
+    <img id='image' src='https://www.kasandbox.org/programming-images/landscapes/clouds-from-plane.png'>
+    <style>
+        hr{
+              height:4px;
+              border:red;
+              border-bottom:black solid 2px;
+              margin-bottom:10px;
+          }
+        footer{
+              margin-top:600px;
+              font-weight:400;
+              text-align:center;
+          }
+          .lora {
+            font-style: normal;
+            font-family: "Lora", serif;
+            
+          }
+          #image{
+              position:fixed;
+              z-index:-10;
+              top:0px;
+              left:0px;
+              width:100%;
+              overflow-x:hidden;
+          }
+          nav a{
+              font-weight:700;
+              background-color:#ec8a00;
+              text-decoration:none;
+              font-size:1.1em;              
+              float:left;
+              margin:0 0px 10px 0px;
+              padding:15px;
+              color:#001dab;
+            
+          }
+          nav{
+              background-color:darkgray;
+              border-bottom:#ec8a00 ridge 0.6em;
+              height:3em;
+              margin:0px;
+              padding-left:45px;
+              position:relative;
+              top:-10px;
+              
+              
+          }
+          body{
+              font-style: normal;
+              font-family: "Lora", serif;
+              text-align:center;
+              background:#d1d1d1;
+          }
+          #title{
+              font-weight: 500;
+              color:#001dab;              
+              text-align:center;
+              height:10;
+            
+          }
+          #replaceMe{
+              font-size:1.2em;
+              background:#d1d1d1;
+              
+          }
+          #sub{
+              text-align:center;
+          }
+      </style>
+      <script>
+          var j;
+          fetch("https://api.scratch.mit.edu/users/BlockCoder111/messages/count")
+.then(res => res.json())
+.then(res => {
+    // Do something with the count here
+    j = res.count;
+                  console.log(j);
+    var me = j;
+                    var node = document.createTextNode(me);
+                    document.getElementById('replaceMe').replaceChildren(node);
+
+    
+})
+
+          var getApi = function(url){
+            var apiUrl = url;
+            fetch(url)
+            .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+            })
+            .then(data => {
+                if(url==='https://api.weather.com/v3/wx/forecast/daily/5day?geocode=34.86943857927993,-120.43803280572449&format=json&units=e&language=en-US&apiKey=78ee0d84473a4c60ae0d84473a4c606c'){
+                    var me = data.narrative[0];
+                    var node = document.createTextNode(me);
+                    document.getElementById('replaceMe').replaceChildren(node);
+                }else if(url==='https://api.weather.gov/gridpoints/LOX/83,95/forecast'){
+                    var me = data.properties.periods[0].detailedForecast;
+                    var node = document.createTextNode(me);
+                    document.getElementById('replaceMe').replaceChildren(node);
+                }else if(url==='https://api.scratch.mit.edu/users/BlockCoder111/messages/count'){
+                    var me = data.count;
+                    console.log(me);
+                }
+            //console.log(JSON.stringify(data));
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+            }
+          
+          
+          getApi("https://api.weather.gov/gridpoints/LOX/83,95/forecast");
+/*
+
+var Scratch = require('scratch-api');
+
+Scratch.UserSession.load(function(err, user) {
+  user.cloudSession(scratch.mit.edu/projects/1054544741, function(err, cloud) {
+    cloud.on('set', function(name, value) {
+      console.log(name, value);
+    });
+  });
+});
+
+*/
+
+
+
+
+
+
+                    // https://api.weather.com/v3/wx/forecast/daily/5day?geocode=34.86943857927993,-120.43803280572449&format=json&units=e&language=en-US&apiKey=78ee0d84473a4c60ae0d84473a4c606c
+                    // https://api.weather.gov/gridpoints/LOX/83,95/forecast
+                    // https://api.scratch.mit.edu/users/BlockCoder111/messages/count
+          //setInterval(getApi,60000,''//url param);
+      </script>
+  </body>
+    <footer>
+        <hr>
+    This page was created inside the STS coterie
+    </footer>
+</html>
