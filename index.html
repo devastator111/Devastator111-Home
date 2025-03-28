@@ -54,5 +54,43 @@ document.getElementById("hey").addEventListener('click',function(){
 <div>
   <code id="cookie-value"></code>
 </div>
+
+    <audio id="myAudio" 
+       src='example.mp3'>
+  
+  Your browser does not support the audio element.
+</audio>
+<p>Click the buttons to play or pause the audio.</p>
+    <!-- <script type="text/javascript">
+    var myyAudio=document.getElementById('audio2')
+    myyAudio.oncanplaythrough=function(){this.play();}
+</script>
+<audio id="audio2" 
+       preload="auto" 
+       src="file.mp3#t=00:00:00" 
+       oncanplaythrough="this.play();">
+</audio>-->
+
+    <button onclick="playAudio()" type="button">Play Audio</button>
+    <button onclick="pauseAudio()" type="button">Pause Audio</button> 
+    <button onclick="ff()" type="button">Fast Forward Audio</button> 
+
+<script>
+    var x = document.getElementById("myAudio"); 
+    
+    function playAudio() {
+        x.play();
+    }
+    
+    function pauseAudio() {
+        x.pause();
+    }
+    function ff(){
+        //x.currentTime+=10000;
+        console.log(x.currentTime);
+        var x.currentTime;
+        console.log(x.currentTime)
+    }
+</script>
   </body>
 </html>
