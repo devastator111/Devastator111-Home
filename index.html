@@ -55,9 +55,8 @@ document.getElementById("hey").addEventListener('click',function(){
   <code id="cookie-value"></code>
 </div>
 
-    <audio controls id="myAudio">
+    <audio controls id="myAudio" src="https://github.com/devastator111/testRepo/raw/refs/heads/main/example.mp3">
   
-        <source src="https://github.com/devastator111/testRepo/raw/refs/heads/main/example.mp3" type="audio/mpeg">
   Your browser does not support the audio element.
 </audio>
 <p>Click the buttons to play or pause the audio.</p>
@@ -78,18 +77,15 @@ document.getElementById("hey").addEventListener('click',function(){
 <script>
     var x = document.getElementById("myAudio"); 
     
-    function playAudio() {
+    playAudio = function() {
         x.play();
     }
     
-    function pauseAudio() {
+    pauseAudio = function() {
         x.pause();
     }
-    function ff(){
-        //x.currentTime+=10000;
-        console.log(x.currentTime);
-        var x.currentTime;
-        console.log(x.currentTime)
+    ff = function(){
+      x.currentTime+=1.5;
     }
 </script>
   </body>
