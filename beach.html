@@ -30,7 +30,8 @@
 	<script src="https://cdn-js.socastsrm.com/cdn_v17.17.7/js/players/player2.js"></script>
 	<script src="//s0.2mdn.net/instream/html5/ima3.js"></script>
 	<script src="https://cdn-js.socastsrm.com/cdn_v17.17.7/js/frontend.js"></script>
-	<script>
+    
+    <script>
 	var socast_page = {
     "cacheKey": "",
     "companyID": "502",
@@ -108,9 +109,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <a href='weather.html'>Weather</a>
         <a href='iframe.html'>Iframe</a>
         <a href=Files.html>Files</a>
+        <div id='countbox'>
+        <p id='countdownInfo'>Weeks Days Hours Minutes Seconds</p>
+        </div>
       </nav>
     </head>
 <body id='playerBody' class='font-opensans'>
+    <script src="countDown.js"></script>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TQ2K7TM"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -305,6 +310,31 @@ body a {
     line-height: 20px;
     float: none;
 }
+        #countbox{
+            text-align:center;
+            float:left;
+            border-radius:10px;
+            background-color:#ac6400;
+            width:400px;
+            height:40px;
+            margin:15px 0 10px 14em;
+            color:black;
+        }
+        #countdownInfo{
+            margin:30px;
+            font-weight:600;
+            font-size:0.9em;
+            margin-top:20px;
+            
+        }
+        #countdown{
+            margin-top:-80px;
+            font-weight:600;
+            font-size:1.2em;
+            position:relative;
+            letter-spacing:2.5px;
+            top:10px;
+        }
     .fullscreen{
               margin:0px 23px 0px 75px;
           }
