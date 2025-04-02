@@ -13,14 +13,44 @@
         <a href='weather.html'>Weather</a>
         <a style='background-color:#ac6400' href='iframe.html'>Iframe</a>
         <a href=Files.html>Files</a>
+        <div id='countbox'>
+        <p id='countdownInfo'>Weeks Days Hours Minutes Seconds</p>
+        </div>
       </nav>
   </head>
   <body>
+      <script src='countDown.js'></script>
       <style>
+        #countbox{
+            text-align:center;
+            float:left;
+            border-radius:10px;
+            background-color:#ac6400;
+            width:400px;
+            height:40px;
+            margin:6px 0 -10px 14em;
+            color:black;
+        }
+        #countdownInfo{
+            margin:30px;
+            font-weight:600;
+            font-size:0.9em;
+            margin-top:20px;
+            
+        }
+        #countdown{
+            margin-top:-80px;
+            font-weight:600;
+            font-size:1.2em;
+            position:relative;
+            letter-spacing:2.5px;
+            top:10px;
+        }
           footer{
               margin-top:300px;
               font-weight:400;
               text-align:center;
+              background-color:#d1d1d1;
           }
           input{
               background-color:darkgray;
@@ -164,7 +194,7 @@
       <div id="links">
       <details class='expand' name='q'><summary class='sum'>OvO<button onclick='copyText("https://www.coolmathgames.com/sites/default/files/public_games/49389/")'>Copy Link</button><button onclick='newIframe("https://www.coolmathgames.com/sites/default/files/public_games/49389/");'>GO</button></summary>Pretty good platformer with interesting combo moves.</details>
       <details class='expand' name='q'><summary class='sum'>xkcd<button onclick='copyText("https://xkcd.com")'>Copy Link</button><button onclick='newIframe("https://xkcd.com");'>GO</button></summary>A nerdy but funny web comic.</details>
-      <details class='expand' name='q'><summary class='sum'>Google Docs<button onclick='copyText("https://docs.google.com")'>Copy Link</button><button onclick='newIframe("https://docs.google.com/document/u/0/?tgif=d");'>GO</button></summary>A nerdy but funny web comic.</details>
+      <details class='expand' name='q'><summary class='sum'>Merriam Webster Word Of The Day<button onclick='copyText("https://www.merriam-webster.com/word-of-the-day")'>Copy Link</button><button onclick='newIframe("https://www.merriam-webster.com/word-of-the-day");'>GO</button></summary>For those (me) who enjoy expanding their vocabulary.</details>
       <details class='expand' name='q'><summary class='sum'>Moto X3M<button onclick='copyText("https://www.coolmathgames.com/sites/default/files/public_games/49091/")'>Copy Link</button><button onclick='newIframe("https://www.coolmathgames.com/sites/default/files/public_games/49091/");'>GO</button></summary>"That's that racing motorbike game right?" -Mr. Taubenheim</details>
      </div>
       <script>
