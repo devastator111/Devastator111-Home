@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
-
+    
     <meta charset="utf-8">
     <style>
         #sider{
@@ -47,7 +47,31 @@ th,td{background:#FFF;text-align:center;width:100%}
 
         
         
-        
+        #countbox{
+            text-align:center;
+            float:left;
+            border-radius:10px;
+            background-color:#ac6400;
+            width:400px;
+            height:40px;
+            margin:6px 0 -10px 14em;
+            color:black;
+        }
+        #countdownInfo{
+            margin:30px;
+            font-weight:600;
+            font-size:0.9em;
+            margin-top:20px;
+            
+        }
+        #countdown{
+            margin-top:-80px;
+            font-weight:600;
+            font-size:1.2em;
+            position:relative;
+            letter-spacing:2.5px;
+            top:10px;
+        }
         footer{
             float:none;
               margin-top:600px;
@@ -245,10 +269,14 @@ th,td{background:#FFF;text-align:center;width:100%}
         <a href='weather.html'>Weather</a>
         <a href='iframe.html'>Iframe</a>
         <a style='background-color:#ac6400' href=Files.html>Files</a>
+        <div id='countbox'>
+        <p id='countdownInfo'>Weeks Days Hours Minutes Seconds</p>
+        </div>
       </nav>
 </head>
 
 <body>
+    <script src="countDown.js"></script>
     <h1 class='title'>File Encryptor and Downloader</h1>
     <form name="f" id="textEnc">
         <h3>Password</h3>
