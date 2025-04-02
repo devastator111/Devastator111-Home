@@ -2,6 +2,7 @@
 <html>
     
   <head>
+      
       <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
@@ -12,18 +13,46 @@
         <a style='background-color:#ac6400' href='weather.html'>Weather</a>
         <a href='iframe.html'>Iframe</a>
         <a href=Files.html>Files</a>
+        <div id='countbox'>
+        <p id='countdownInfo'>Weeks Days Hours Minutes Seconds</p>
+        </div>
       </nav>
   </head>
   <body>
+    <script src='countDown.js'></script>
     <!--<h1 class='lora' id='title'>Weather</h1>-->
     <h1 id='sub'>Weekly Forecast</h1>
     <hr>
     <p id='replaceMe'>Weather did not pull.</p>
     <img id='image' src='https://www.kasandbox.org/programming-images/landscapes/clouds-from-plane.png'>
     <style>
+        #countbox{
+            float:left;
+            border-radius:10px;
+            background-color:#ac6400;
+            width:400px;
+            height:40px;
+            margin:6px 0 -10px 14em;
+            color:black;
+        }
+        #countdownInfo{
+            margin:30px;
+            font-weight:600;
+            font-size:0.9em;
+            margin-top:20px;
+            
+        }
+        #countdown{
+            margin-top:-80px;
+            font-weight:600;
+            font-size:1.2em;
+            position:relative;
+            letter-spacing:2.5px;
+            top:10px;
+        }
         hr{
               height:4px;
-              border:red;
+              border:black;
               border-bottom:black solid 2px;
               margin-bottom:10px;
           }
@@ -43,7 +72,7 @@
               top:0px;
               left:0px;
               width:100%;
-              overflow-x:hidden;
+              
           }
           nav a{
               font-weight:700;
@@ -54,6 +83,7 @@
               margin:0 0px 10px 0px;
               padding:15px;
               color:#001dab;
+              
             
           }
           nav{
@@ -64,6 +94,7 @@
               padding-left:45px;
               position:relative;
               top:-10px;
+              overflow:hidden;
               
               
           }
@@ -72,6 +103,7 @@
               font-family: "Lora", serif;
               text-align:center;
               background:#d1d1d1;
+              overflow-x:hidden;
           }
           #title{
               font-weight: 500;
@@ -89,6 +121,7 @@
               text-align:center;
           }
       </style>
+      
       <script>
           var j;
           fetch("https://api.scratch.mit.edu/users/BlockCoder111/messages/count")
@@ -159,6 +192,7 @@ Scratch.UserSession.load(function(err, user) {
                     // https://api.scratch.mit.edu/users/BlockCoder111/messages/count
           //setInterval(getApi,60000,''//url param);
       </script>
+      
   </body>
     <footer>
         <hr>
