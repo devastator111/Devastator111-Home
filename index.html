@@ -1,77 +1,95 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <title>Devastator111: Weather</title>
     <nav>
-      <a href=weather.html>Weather</a>
+        <a href=weather.html>Weather</a>
     </nav>
-  </head>
-  <body>
+</head>
+<body>
     <p>Make something amazing with Tynker</p>
     <script>
-      //document.cookie = "test1=Hello; SameSite=None; Secure";
-      //document.cookie = "test2=World; SameSite=None; Secure";
-      //document.cookie = "test2=Hello; expires=Thu, 01 Jan 1970 00:00:00 UTC;";  
-      document.cookie = "test1=Hello; SameSite=None; Secure";
-      document.cookie = "test2="+Date.now()+"; SameSite=None; Secure";
-      //document.cookie = "test2=Hello; expires=Thu, 01 Jan 1970 00:00:00 UTC;";  
-      function getCookie(name){   
-        return document.cookie
-        .split("; ")
-        .find((row) => row.startsWith(name+"="))
-        ?.split("=")[1];
-      }
-      function showCookieValue() {
-        const output = document.getElementById("cookie-value");
-        output.textContent = cookieValue;
-      }
+        
+        document.cookie = "test1=Hello; SameSite=None; Secure";
+        document.cookie = "test2="+Date.now()+"; SameSite=None; Secure";
+        //document.cookie = "test2=Hello; expires=Thu, 01 Jan 1970 00:00:00 UTC;";  
+        var allsongs = [{title:"Rey's Theme",artist:"John Williams",length:"30",link:"https://github.com/devastator111/testRepo/raw/refs/heads/main/example.mp3"},
+                      {title:"Flagpole Sitta",artist:"Harvey Danger",length:"",link:""}];
+        var findTitle;
+        //expireCookies();
+        console.log(getCookie('songTime'))
+        if(getCookie("songTime")){
+            playSong(getCookie("songTitle"),getCookie("songTime"));
+        }else{
+            playSong("Rey's Theme",0);
+        }
+        
+        function getCookie(name){
+            if(document.cookie.includes(name)){
+            return document.cookie
+            .split("; ")
+            .find((row) => row.startsWith(name+"="))
+            ?.split("=")[1];
+            }else{
+                return false;
+            }
+        };
+        
+        function expireCookies() {
+            document.cookie = "currentTime=--; SameSite=None; expires=Thu 01 Jan 1970 00:00:00 UTC; Secure ";
+            document.cookie = "songTime=--; SameSite=None; expires=Thu 01 Jan 1970 00:00:00 UTC; Secure ";
+            document.cookie = "startTime=--; SameSite=None; expires=Thu 01 Jan 1970 00:00:00 UTC; Secure";
+            document.cookie = "totalTime=--; SameSite=None; expires=Thu 01 Jan 1970 00:00:00 UTC; Secure";
 
-      function clearOutputCookieValue() {
-        const output = document.getElementById("cookie-value");
-        output.textContent = "";
-      }
-    </script>      
+        }
+        function showCookieValue() {
+            const output = document.getElementById("cookie-value");
+            output.textContent = getCookie('currentTime');
+        };
+
+        function clearOutputCookieValue() {
+            const output = document.getElementById("cookie-value");
+            output.textContent = "";
+        };
+        var saveTime = function(){
+            document.cookie = "currentTime="+Date.now()+"; SameSite=None; expires=None; Secure"
+            const output = document.getElementById("cookie-value");
+            output.textContent = getCookie('currentTime');
+            document.cookie = "songTime="+document.getElementById("song").currentTime+"; SameSite=None; Secure";
+        };
+        //saveTime();
+        setInterval(saveTime,100);
+        
+      function findSong(element){
+        if(element.title===findTitle){
+          return true;
+        }
+      };
+      function playSong(searchTitle,time){
+        findTitle = searchTitle;
+        text = document.createTextNode("he");
+        newAudio = document.createElement("AUDIO");
+        newAudio.src=allsongs[allsongs.findIndex(findSong)].link;
+        newAudio.currentTime = time;
+        newAudio.controls = true;
+        newAudio.autoplay = false;
+        newAudio.setAttribute("id","song")
+        document.querySelector("body").appendChild(newAudio);
+        document.cookie = "startTime="+Date.now()-newAudio.currentTime*1000+"; SameSite=None; Secure";
+        
+        document.cookie = "songTitle="+searchTitle+"; SameSite=None; Secure";
+      };
+      //playSong("Rey's Theme",12);
+
+
+
+
+    </script>  
     <button onclick="showCookieValue()">Show cookie value</button>
     <button onclick="clearOutputCookieValue()">Clear</button>
     <div>
-      <code id="cookie-value"></code>
+        <code id="cookie-value"></code>
     </div>
-    <audio controls id="myAudio" src="https://github.com/devastator111/testRepo/raw/refs/heads/main/example.mp3">
-      Your browser does not support the audio element.
-    </audio>
-    <p>Click the buttons to play or pause the audio.</p>
-    <button onclick="playAudio()" type="button">Play Audio</button>
-    <button onclick="pauseAudio()" type="button">Pause Audio</button> 
-    <button onclick="ff()" type="button">Fast Forward Audio</button> 
-    <script>
-      
-      var allsongs = [{title:"Rey's Theme",artist:"John Williams",length:"30",link:"https://github.com/devastator111/testRepo/raw/refs/heads/main/example.mp3"},
-                      {title:"Flagpole Sitta",artist:"Harvey Danger",length:"",link:""}];
-      function findSong(){
-        
-      }
-      var x = document.getElementById("myAudio"); 
-      playAudio = function() {
-        x.play();
-      }
-      
-      pauseAudio = function() {
-        x.pause();
-      }
-      ff = function(){
-        x.currentTime+=1.5;
-      }
-      function saveTime(){
-        document.cookie = "currentTime="+Date.now()+"; SameSite=None; Secure"
-        const output = document.getElementById("cookie-value");
-        output.textContent = getCookie('currentTime');
-      }
-      setInterval(saveTime,100);
-      function playSong(title){
-        newAudio = document.createElement("AUDIO");
-        newAudio.src=
-      }
-    </script>
-  </body>
+</body>
 </html>
