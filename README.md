@@ -1,9 +1,21 @@
-# Devastator Home v0.1.4.a
+# Devastator Home v0.1.5.a
 ### <strong>Update Log</strong>
+---
+4-12-25 (v0.1.5.a):
+- Branched main with updated audio player code from Tynker
+- Merged main and branch
 ---
 4-12-25 (v0.1.4.a):
 - Re-added songs that were in the wrong format (wav vs mp3)
-  - Hysteria  
+  - Hysteria (Muse)
+  - American Idiot (Green Day)
+  - Time is Running Out (Muse)
+  - I Love Rock N' Roll (Joan Jett)
+  - Lonely Boy (Black Keys)
+  - Blitzkrieg Bop (Ramones)
+  - Blue Orchid (White Stripes)
+  - Rock & Roll Band (Boston)
+  - Holiday (Green Day)
 ---
 4-6-25 (v0.1.3.a):
 - Added files for songs
