@@ -1,5 +1,9 @@
-# Devastator Home v0.1.3.a
+# Devastator Home v0.1.4.a
 ### <strong>Update Log</strong>
+---
+4-12-25 (v0.1.4.a):
+- Re-added songs that were in the wrong format (wav vs mp3)
+  - Hysteria  
 ---
 4-6-25 (v0.1.3.a):
 - Added files for songs
