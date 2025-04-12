@@ -8,25 +8,62 @@
     </nav>
 </head>
 <body>
+    
     <p>Make something amazing with Tynker</p>
+    <div id="holder">
+        
+    </div>
     <script>
-        
-        document.cookie = "test1=Hello; SameSite=None; Secure";
-        document.cookie = "test2="+Date.now()+"; SameSite=None; Secure";
-        //document.cookie = "test2=Hello; expires=Thu, 01 Jan 1970 00:00:00 UTC;";  
-        var allsongs = [{title:"Rey's Theme",artist:"John Williams",length:"30",link:"https://github.com/devastator111/testRepo/raw/refs/heads/main/example.mp3"},
-                      {title:"Flagpole Sitta",artist:"Harvey Danger",length:"",link:""}];
-        var findTitle;
-        //expireCookies();
-        console.log(getCookie('songTime'))
-        if(getCookie("songTime")){
-            playSong(getCookie("songTitle"),getCookie("songTime"));
-        }else{
-            playSong("Rey's Theme",0);
+        //expireCookies()
+        var allsongs = [{title:"Rey's Theme",artist:"John Williams",link:"https://github.com/devastator111/testRepo/raw/refs/heads/main/example.mp3"},
+                      {title:"Flagpole Sitta",artist:"Harvey Danger",link:"https://github.com/devastator111/testRepo/raw/refs/heads/main/Flagpole%20Sitta.mp3"},
+                       {title:"Back In Black",artist:"AC/DC",link:"https://github.com/devastator111/testRepo/raw/refs/heads/main/Back%20In%20Black.mp3"},
+                       {title:"Hysteria",artist:"Muse",link:"https://github.com/devastator111/testRepo/raw/refs/heads/main/Hysteria.mp3"},
+                       {title:"Smells Like Teen Spirit",artist:"Nirvana",link:"https://github.com/devastator111/testRepo/raw/refs/heads/main/Smells%20Like%20Teen%20Spirit.wav"},
+                       {title:"Rock And Roll Band",artist:"Boston",link:"https://github.com/devastator111/testRepo/raw/refs/heads/main/Rock%20&%20Roll%20Band%20(1).wav"},
+                       {title:"Come Out And Play",artist:"The Offspring",link:"https://github.com/devastator111/testRepo/raw/refs/heads/main/Play.mp3"},
+                       {title:"The Anthem",artist:"Good Charlotte",link:"https://github.com/devastator111/testRepo/raw/refs/heads/main/The%20Anthem.mp3"},
+                       {title:"I Wanna Rock",artist:"Twisted Sister",link:"https://github.com/devastator111/testRepo/raw/refs/heads/main/i%20wanna%20rock%20(1).wav"},
+                       {title:"I Want To Be Sedated",artist:"The Ramones",link:"https://github.com/devastator111/testRepo/raw/refs/heads/main/I%20wanna%20be%20sedated.wav"},
+                       {title:"Blitzkrieg Bop",artist:"Ramones",link:"https://github.com/devastator111/testRepo/raw/refs/heads/main/Blitzkrieg%20Bop.wav"},
+                       
+                       {title:"Take On Me",artist:"Karl Kling",link:"https://github.com/devastator111/testRepo/raw/refs/heads/main/2332304.0.mp3"}];
+        var queue = {
+            songs:["I Wanna Rock",],//use titles
+            alreadyPlayed:[],
+            nextSong() {
+                this.alreadyPlayed.push(songs[0]);
+                this.songs.splice(0,1);
+                playSong(this.songs[0],0);
+                
+            },
+            addSong(title) {
+                if(Array.isArray(title)){
+                    for (item of title) {
+                        this.songs.push(item.title);
+                    }
+                }else this.songs.push(title);
+                
+            },
+            clearSongs() {
+                this.songs = [];
+            },
+        };
+        if(getCookie("queue")){
+            //queue.clearSongs();
+            //queue.addSong(allsongs);
+            queue.songs = getCookie("queue").split(",");
+            //playSong(queue.songs[0],0);
+            playSong("Blitzkrieg Bop",0);
         }
-        
+        Playlist = function(songs){
+            this.songs = [songs],
+            this.queueList = function(){
+                
+            }
+        }
         function getCookie(name){
-            if(document.cookie.includes(name)){
+            if(document.cookie.includes(name.concat("="))){
             return document.cookie
             .split("; ")
             .find((row) => row.startsWith(name+"="))
@@ -35,61 +72,60 @@
                 return false;
             }
         };
-        
         function expireCookies() {
             document.cookie = "currentTime=--; SameSite=None; expires=Thu 01 Jan 1970 00:00:00 UTC; Secure ";
             document.cookie = "songTime=--; SameSite=None; expires=Thu 01 Jan 1970 00:00:00 UTC; Secure ";
             document.cookie = "startTime=--; SameSite=None; expires=Thu 01 Jan 1970 00:00:00 UTC; Secure";
             document.cookie = "totalTime=--; SameSite=None; expires=Thu 01 Jan 1970 00:00:00 UTC; Secure";
-
+            document.cookie = "queue=--; SameSite=None; expires=Thu 01 Jan 1970 00:00:00 UTC; Secure";
         }
-        function showCookieValue() {
-            const output = document.getElementById("cookie-value");
-            output.textContent = getCookie('currentTime');
-        };
-
-        function clearOutputCookieValue() {
-            const output = document.getElementById("cookie-value");
-            output.textContent = "";
-        };
-        var saveTime = function(){
+        function saveTime(){
             document.cookie = "currentTime="+Date.now()+"; SameSite=None; expires=None; Secure"
             const output = document.getElementById("cookie-value");
-            output.textContent = getCookie('currentTime');
-            document.cookie = "songTime="+document.getElementById("song").currentTime+"; SameSite=None; Secure";
+            if(output!=null){
+                output.textContent = getCookie('currentTime');
+            }
+            if(document.getElementById("song")!=null){
+                document.cookie = "songTime="+document.getElementById("song").currentTime+"; SameSite=None; Secure";
+            }
+            document.cookie = "queue="+queue.songs+"; SameSite=None; Secure";
         };
-        //saveTime();
+        saveTime();
         setInterval(saveTime,100);
         
-      function findSong(element){
-        if(element.title===findTitle){
-          return true;
-        }
-      };
+            
       function playSong(searchTitle,time){
         findTitle = searchTitle;
-        text = document.createTextNode("he");
         newAudio = document.createElement("AUDIO");
-        newAudio.src=allsongs[allsongs.findIndex(findSong)].link;
+        newAudio.src=allsongs.find(function(element){
+          if(element.title===findTitle){
+          return true;
+          }
+            }).link;
         newAudio.currentTime = time;
         newAudio.controls = true;
-        newAudio.autoplay = false;
-        newAudio.setAttribute("id","song")
-        document.querySelector("body").appendChild(newAudio);
-        document.cookie = "startTime="+Date.now()-newAudio.currentTime*1000+"; SameSite=None; Secure";
-        
+        newAudio.autoplay = true;
+        newAudio.setAttribute("id","song");
+        newAudio.addEventListener("ended",()=>{
+            queue.nextSong();
+            
+        });
+        document.getElementById("holder").replaceChildren(newAudio);
         document.cookie = "songTitle="+searchTitle+"; SameSite=None; Secure";
+            
       };
-      //playSong("Rey's Theme",12);
-
+      function swap(){
+            var title = prompt("Please type the name of a song", "Song");
+            playSong(title,0);
+      }
 
 
 
     </script>  
-    <button onclick="showCookieValue()">Show cookie value</button>
-    <button onclick="clearOutputCookieValue()">Clear</button>
+    <button onclick="swap()">Change Song</button>
     <div>
         <code id="cookie-value"></code>
     </div>
+    
 </body>
 </html>
