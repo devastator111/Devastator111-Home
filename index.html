@@ -8,124 +8,28 @@
     </nav>
 </head>
 <body>
-    
-    <p>Make something amazing with Tynker</p>
+    <style>
+        @import url("global.css");
+    </style>
     <div id="holder">
         
     </div>
-    <script>
-        //expireCookies()
-        var allsongs = [{title:"Rey's Theme",artist:"John Williams",link:"https://github.com/devastator111/Devastator111-Home/raw/refs/heads/main/example.mp3"},
-                      {title:"Flagpole Sitta",artist:"Harvey Danger",link:"https://github.com/devastator111/Devastator111-Home/raw/refs/heads/main/Flagpole%20Sitta.mp3"},
-                       {title:"Back In Black",artist:"AC/DC",link:"https://github.com/devastator111/Devastator111-Home/raw/refs/heads/main/Back%20In%20Black.mp3"},
-                       {title:"Hysteria",artist:"Muse",link:"https://github.com/devastator111/Devastator111-Home/raw/refs/heads/main/Hysteria.mp3"},
-                       {title:"Smells Like Teen Spirit",artist:"Nirvana",link:"https://github.com/devastator111/Devastator111-Home/raw/refs/heads/main/Smells%20Like%20Teen%20Spirit.wav"},
-                       {title:"Rock And Roll Band",artist:"Boston",link:"https://github.com/devastator111/Devastator111-Home/raw/refs/heads/main/Rock%20&%20Roll%20Band.mp3"},
-                       {title:"Come Out And Play",artist:"The Offspring",link:"https://github.com/devastator111/Devastator111-Home/raw/refs/heads/main/Play.mp3"},
-                       {title:"The Anthem",artist:"Good Charlotte",link:"https://github.com/devastator111/Devastator111-Home/raw/refs/heads/main/The%20Anthem.mp3"},
-                       {title:"I Wanna Rock",artist:"Twisted Sister",link:"https://github.com/devastator111/Devastator111-Home/raw/refs/heads/main/i%20wanna%20rock%20(1).wav"},
-                       {title:"I Want To Be Sedated",artist:"The Ramones",link:"https://github.com/devastator111/Devastator111-Home/raw/refs/heads/main/I%20wanna%20be%20sedated.wav"},
-                       {title:"Blitzkrieg Bop",artist:"Ramones",link:"https://github.com/devastator111/Devastator111-Home/raw/refs/heads/main/Blitzkrieg%20Bop.mp3"},
-                       
-                       {title:"Take On Me",artist:"Karl Kling",link:"https://github.com/devastator111/Devastator111-Home/raw/refs/heads/main/2332304.0.mp3"}];
-        var queue = {
-            songs:["I Wanna Rock",],//use titles
-            alreadyPlayed:[],
-            nextSong() {
-                this.alreadyPlayed.push(songs[0]);
-                this.songs.splice(0,1);
-                playSong(this.songs[0],0);
-                
-            },
-            addSong(title) {
-                if(Array.isArray(title)){
-                    for (item of title) {
-                        this.songs.push(item.title);
-                    }
-                }else this.songs.push(title);
-                
-            },
-            clearSongs() {
-                this.songs = [];
-            },
-        };
-        if(getCookie("queue")){
-            //queue.clearSongs();
-            //queue.addSong(allsongs);
-            queue.songs = getCookie("queue").split(",");
-            //playSong(queue.songs[0],0);
-            playSong("Blitzkrieg Bop",0);
-        }
-        Playlist = function(songs){
-            this.songs = [songs],
-            this.queueList = function(){
-                
-            }
-        }
-        function getCookie(name){
-            if(document.cookie.includes(name.concat("="))){
-            return document.cookie
-            .split("; ")
-            .find((row) => row.startsWith(name+"="))
-            ?.split("=")[1];
-            }else{
-                return false;
-            }
-        };
-        function expireCookies() {
-            document.cookie = "currentTime=--; SameSite=None; expires=Thu 01 Jan 1970 00:00:00 UTC; Secure ";
-            document.cookie = "songTime=--; SameSite=None; expires=Thu 01 Jan 1970 00:00:00 UTC; Secure ";
-            document.cookie = "startTime=--; SameSite=None; expires=Thu 01 Jan 1970 00:00:00 UTC; Secure";
-            document.cookie = "totalTime=--; SameSite=None; expires=Thu 01 Jan 1970 00:00:00 UTC; Secure";
-            document.cookie = "queue=--; SameSite=None; expires=Thu 01 Jan 1970 00:00:00 UTC; Secure";
-        }
-        function saveTime(){
-            document.cookie = "currentTime="+Date.now()+"; SameSite=None; expires=None; Secure"
-            const output = document.getElementById("cookie-value");
-            if(output!=null){
-                output.textContent = getCookie('currentTime');
-            }
-            if(document.getElementById("song")!=null){
-                document.cookie = "songTime="+document.getElementById("song").currentTime+"; SameSite=None; Secure";
-            }
-            document.cookie = "queue="+queue.songs+"; SameSite=None; Secure";
-        };
-        saveTime();
-        setInterval(saveTime,100);
-        
-            
-      function playSong(searchTitle,time){
-        findTitle = searchTitle;
-        newAudio = document.createElement("AUDIO");
-        newAudio.src=allsongs.find(function(element){
-          if(element.title===findTitle){
-          return true;
-          }
-            }).link;
-        newAudio.currentTime = time;
-        newAudio.controls = true;
-        newAudio.autoplay = true;
-        newAudio.setAttribute("id","song");
-        newAudio.addEventListener("ended",()=>{
-            queue.nextSong();
-            
-        });
-        document.getElementById("holder").replaceChildren(newAudio);
-        document.cookie = "songTitle="+searchTitle+"; SameSite=None; Secure";
-            
-      };
-      function swap(){
-            var title = prompt("Please type the name of a song", "Song");
-            playSong(title,0);
-      }
+    <div id="audiobar">
+        <span id="title"></span>
+        <span id="time"></span><br>
+        <button onclick="queue.prevSong()" style="width:40px;height:20px;position:relative;top:2px;margin-left:0px;margin-top:0px;"><img src="imageAssets/previous.png" style="width:15px"></button>
+        <button onclick="toggleAudio()" style="width:40px;height:20px;margin:0px;position:relative;top:10px;left:6px"><img src="https://static.thenounproject.com/png/654632-200.png" width=23 style="position:relative;top:-3px;left:0px;"></button>
+        <button onclick="queue.nextSong()" style="padding:0px;width:40px;height:20px;top:5px;position:relative;"><img src="imageAssets/FF.webp" style="width:19px; margin:0px;"></button>
 
-
-
-    </script>  
-    <button onclick="swap()">Change Song</button>
-    <div>
-        <code id="cookie-value"></code>
+        <br>
+        <button onclick="queue.addSong(false)" style="margin:auto">Add Song To Queue</button>
+        <button onclick="queue.swapSong()" style="margin:auto">Change Song</button>
+        <button onclick="queue.clearSongs()" style="margin:auto;">Clear Queue</button>
     </div>
+    <script src="audio.js"></script>
+
     
 </body>
 </html>
+
+

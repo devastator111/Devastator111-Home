@@ -1,0 +1,160 @@
+/*~~~~~~~~~~~~~~~~~~PALETTE~~~~~~~~~~~~~~~~~*/
+/*~Background:#1~#d1d1d1*/
+/*~Background:#2~darkgray*/
+/*~Button:Normal~#ac6400*/
+/*~Button:Hover~#ec8a00*/
+/*~Subtitle:~#001dab*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+@import url('https://fonts.googleapis.com/css2?family=Electrolize&family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+:root{
+    --bg-color:#d1d1d1;
+    --secondary-bg-color:darkgray;
+    --button-norm-color:#ac6400;
+    --button-hover-color:#ec8a00;
+    --subtitle-color:#001dab;
+}
+* {
+    text-align:left;
+    font-family:"Lora";
+}
+@keyframes slider{
+    from{
+        margin-bottom:11px;
+    }
+    to{
+        margin-bottom:10px;
+    }
+}
+@keyframes drop-fade-in{
+    from{
+        opacity:0;
+        transform:translate(0px, -10px);
+    }
+    to{
+        opacity:1;
+        transform:translate(0);
+    }
+}
+@keyframes fade-in{
+    from{
+        opacity:0;
+        transform:scale(0.7,0.7);
+    }
+    to{
+        opacity:1;
+        transform:scale(1,1);
+    }
+}
+body{
+    font-style: normal;
+    background:var(--bg-color);
+    overflow-x:hidden;
+}
+nav a{
+    font-weight:700;
+    background-color:var(--button-hover-color);
+    text-decoration:none;
+    font-size:1.1em;              
+    float:left;
+    margin:0 0px 10px 0px;
+    padding:15px;
+    color:var(--subtitle-color);
+}
+nav{
+    background-color:darkgray;
+    border-bottom:var(--button-hover-color) ridge 0.6em;
+    height:3em;
+    margin:0px;
+    padding-left:45px;
+    position:relative;
+    top:-10px;      
+}
+footer{
+    margin-top:300px;
+    font-weight:400;
+    text-align:center;
+    background-color:var(--bg-color);
+}
+input{
+    background-color:var(--secondary-bg-color);
+}
+input:invalid{
+    color:red;
+}
+h2{
+    font-weight: 500;
+    font-family:"Lora";
+    color:var(--subtitle-color);
+    height:10;
+}
+h1, h2, h3, h4, h5{
+    text-align:center
+}
+button{
+    background-color:var(--button-norm-color);
+    margin-left:10px;
+    border-radius:4px;
+    font-family:sans-serif;
+}
+button:hover{
+    position:relative;
+    top:2px;
+    background-color:var(--button-hover-color);
+}
+
+.dropper{
+    opacity:0;
+    animation-name:drop-fade-in, slider;
+    animation-duration:0.5s, 1s;
+    animation-iteration-count:1, infinite;
+    animation-fill-mode:forwards;
+    animation-play-state:running, paused
+}
+.fader{
+    animation:0.8s 1 fade-in running;
+}
+
+#audiobar{
+    background-color:var(--button-hover-color);
+    position:fixed;
+    top:81%;
+    width:65%;
+    left:17.5%;
+    height:73px;
+    text-align:center;
+    border:black outset 3px;
+    border-radius:10px;
+    text-align:center;
+    z-index:1;
+    
+}
+#audiobar span{
+    font-weight:500;
+}
+#countbox{
+    padding-top:5px;
+    text-align:center;
+    float:left;
+    border-radius:10px;
+    background-color:var(--button-norm-color);
+    width:400px;
+    height:40px;
+    margin:6px 0 -10px 14em;
+    color:black;
+}
+#countdownInfo{
+    margin:30px;
+    font-weight:600;
+    font-size:0.9em;
+    margin-top:20px;
+    text-align:center;
+}
+#countdown{
+    text-align:center;
+    margin-top:-80px;
+    font-weight:600;
+    font-size:1.2em;
+    position:relative;
+    letter-spacing:2.5px;
+    top:10px;
+}
