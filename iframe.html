@@ -2,8 +2,8 @@
 <html>
   <head>
       <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
     <meta charset="utf-8">
     <title>Devastator111: Iframe</title>
       
@@ -19,49 +19,56 @@
       </nav>
   </head>
   <body>
-      <script src='countDown.js'></script>
+      <script src='scripts/countDown.js'></script>
+          <div id="holder">
+        
+    </div>
+    <div id="audiobar">
+        <span id="title"></span>
+        <span id="time"></span><br>
+        <button onclick="queue.prevSong()" style="width:40px;height:20px;position:relative;top:2px;margin-left:0px;margin-top:0px;"><img src="imageAssets/previous.png" style="width:15px"></button>
+        <button onclick="toggleAudio()" style="width:40px;height:20px;margin:0px;position:relative;top:10px;left:6px"><img src="https://static.thenounproject.com/png/654632-200.png" width=23 style="position:relative;top:-3px;left:0px;"></button>
+        <button onclick="queue.nextSong()" style="padding:0px;width:40px;height:20px;top:5px;position:relative;"><img src="imageAssets/FF.webp" style="width:19px; margin:0px;"></button>
+
+        <br>
+        <button onclick="queue.addSong(false)" style="margin:auto">Add Song To Queue</button>
+        <button onclick="queue.swapSong()" style="margin:auto">Change Song</button>
+        <button onclick="queue.clearSongs()" style="margin:auto;">Clear Queue</button>
+    </div>
+    <script src="scripts/audio.js"></script>
       <style>
-        #countbox{
-            text-align:center;
-            float:left;
-            border-radius:10px;
-            background-color:#ac6400;
-            width:400px;
-            height:40px;
-            margin:6px 0 -10px 14em;
-            color:black;
-        }
-        #countdownInfo{
-            margin:30px;
-            font-weight:600;
-            font-size:0.9em;
-            margin-top:20px;
-            
-        }
-        #countdown{
-            margin-top:-80px;
-            font-weight:600;
-            font-size:1.2em;
-            position:relative;
-            letter-spacing:2.5px;
-            top:10px;
-        }
-          footer{
-              margin-top:300px;
-              font-weight:400;
-              text-align:center;
-              background-color:#d1d1d1;
+        @import url("global.css");
+          @keyframes frame-zoom-in{
+              from{
+                  position:relative;
+                  opacity:1;
+                  width:304px;
+                  height:154px;
+              }
+              50%{
+                  opacity:0;
+                  width:304px;
+                  height:154px;
+              }
+              to{
+                  opacity:1;
+                  position:absolute;
+                  top:0px;
+                  left:0px;
+                  width:100%;
+                  height:100%;
+                  z-index:1;
+              }
           }
-          input{
-              background-color:darkgray;
+          .frameZoom {
+            animation:1s normal forwards infinite frame-zoom-in paused,
+            0.8s 1 fade-in running;
           }
-          input:invalid{
-              color:red;
+          .fullscreen {
+              margin:0 23px 0 75px;
+              animation:0.8s 1 fade-in running;
           }
-          .fullscreen{
-              margin:0px 23px 0px 75px;
-          }
-          .close{
+          .close {
               margin-right:70px;
           }
           .lora {
@@ -77,62 +84,8 @@
               width:100%;
               overflow-x:hidden;
           }
-          .sum{
-              background-color:darkgray;
-              padding:10px;
-              
-          }
-          .expand{
-              padding-bottom:10px;
-              margin-bottom:0px;
-          }
-          button{
-              background-color:#ac6400;
-              margin-left:10px;
-              border-radius:4px;
-          }
-          button:hover{
-              position:relative;
-              top:2px;
-              background-color:#ec8a00;
-          }
-          
-          nav a{
-              font-weight:700;
-              background-color:#ec8a00;
-              text-decoration:none;
-              font-size:1.1em;              
-              float:left;
-              margin:0 0px 10px 0px;
-              padding:15px;
-              color:#001dab;
-          }
-          nav a:active{
-              background-color:#7b4800;
-          }
           .iframe:focus{
               border:black solid 4px;
-          }
-          nav{
-              background-color:darkgray;
-              border-bottom:#ec8a00 ridge 0.6em;
-              height:3em;
-              margin:0px;
-              padding-left:45px;
-              position:relative;
-              top:-10px;
-              
-              
-          }
-          body{
-              font-weight:500;
-              font-style: normal;
-              font-family: "Lora", serif;
-              text-align:left;
-              background:#d1d1d1;
-          }
-          .title{
-              text-align:center;
           }
           .sub{
               text-align:center;
@@ -154,13 +107,12 @@
               border-bottom:black solid 2px;
               margin-bottom:10px;
           }
-          #linkBlock{
-              border:black solid 2px;
-          }
           summary button{
               float:none
           }
           summary{
+              background-color:darkgray;
+              padding:10px;
               border-radius:10px;
               margin-bottom:-11px;
               border:black solid 2px;
@@ -180,10 +132,17 @@
               padding-bottom:-10px;
           }
           details{
-              
+              padding-bottom:10px;
+              margin-bottom:0px;
+          }
+          details p{
+              text-align:center;
+              margin:4px;
+          }
+          .gcse-search{
+              margin-bottom:-10px;
           }
       </style>
-      
       <h1 class='title'>Iframe Player</h1>
       <h2 class='sub'>Active Iframes</h2>
       <div id='activeFrames'><p id='none'>No active Iframes</p></div>
@@ -192,15 +151,31 @@
       <span><label for="name">If you have a url, you can type it here:</label><input type="url" id="name" name="name" size="10" placeholder="https://example.com"/><button onclick='newIframeInput()'>GO</button></span>
       <p>Otherwise, you can use one of these quick links</p>
       <div id="links">
-      <details class='expand' name='q'><summary class='sum'>OvO<button onclick='copyText("https://www.coolmathgames.com/sites/default/files/public_games/49389/")'>Copy Link</button><button onclick='newIframe("https://www.coolmathgames.com/sites/default/files/public_games/49389/");'>GO</button></summary>Pretty good platformer with interesting combo moves.</details>
-      <details class='expand' name='q'><summary class='sum'>xkcd<button onclick='copyText("https://xkcd.com")'>Copy Link</button><button onclick='newIframe("https://xkcd.com");'>GO</button></summary>A nerdy but funny web comic.</details>
-      <details class='expand' name='q'><summary class='sum'>Merriam Webster Word Of The Day<button onclick='copyText("https://www.merriam-webster.com/word-of-the-day")'>Copy Link</button><button onclick='newIframe("https://www.merriam-webster.com/word-of-the-day");'>GO</button></summary>For those (me) who enjoy expanding their vocabulary.</details>
-      <details class='expand' name='q'><summary class='sum'>Moto X3M<button onclick='copyText("https://www.coolmathgames.com/sites/default/files/public_games/49091/")'>Copy Link</button><button onclick='newIframe("https://www.coolmathgames.com/sites/default/files/public_games/49091/");'>GO</button></summary>"That's that racing motorbike game right?" -Mr. Taubenheim</details>
-     </div>
-      <script>
+      <details name='q'><summary class='sum'>Coolmath</summary>
+        <script async src="https://cse.google.com/cse.js?cx=f4f1d82d60b884dfc"></script>
+        <div class="gcse-search"></div>
+        <P>Moto X3M<button onclick='copyText("https://www.coolmathgames.com/sites/default/files/public_games/49091/")'>Copy Link</button><button onclick='newIframe("https://www.coolmathgames.com/sites/default/files/public_games/49091/");'>GO</button></P>
+        <P>Moto X3M Pool Party<button onclick='copyText("https://www.coolmathgames.com/sites/default/files/public_games/26348/")'>Copy Link</button><button onclick='newIframe("https://www.coolmathgames.com/sites/default/files/public_games/26348/");'>GO</button></P>    
+        <P>Awesome Tanks 1<button onclick='copyText("https://www.coolmathgames.com/sites/default/files/public_games/48573/")'>Copy Link</button><button onclick='newIframe("https://www.coolmathgames.com/sites/default/files/public_games/48573/");'>GO</button></P>
+        <P>Aweseme Tanks 2<button onclick='copyText("https://www.coolmathgames.com/sites/default/files/public_games/24012/")'>Copy Link</button><button onclick='newIframe("https://www.coolmathgames.com/sites/default/files/public_games/24012/");'>GO</button></P>
+        <P>Asteroids<button onclick='copyText("https://www.coolmathgames.com/sites/default/files/public_games/40444/?gd_sdk_referrer_url=https%3A%2F%2Fwww.coolmathgames.com%2F0-asteroids")'>Copy Link</button><button onclick='newIframe("https://www.coolmathgames.com/sites/default/files/public_games/40444/?gd_sdk_referrer_url=https%3A%2F%2Fwww.coolmathgames.com%2F0-asteroids");'>GO</button></P>
+        <P>Run 3<button onclick='copyText("https://www.coolmathgames.com/sites/default/files/public_games/49091/")'>Copy Link</button><button onclick='newIframe("https://www.coolmathgames.com/sites/default/files/public_games/49091/");'>GO</button></P>
+        <P>OvO<button onclick='copyText("https://www.coolmathgames.com/sites/default/files/public_games/49389/")'>Copy Link</button><button onclick='newIframe("https://www.coolmathgames.com/sites/default/files/public_games/49389/");'>GO</button></P>
+        </details>
+      <details name='q'><summary class='sum'>xkcd<button onclick='copyText("https://xkcd.com")'>Copy Link</button><button onclick='newIframe("https://xkcd.com");'>GO</button></summary>A nerdy but funny web comic.</details>
+      <details name='q'><summary class='sum'>Merriam Webster Word Of The Day<button onclick='copyText("https://www.merriam-webster.com/word-of-the-day")'>Copy Link</button><button onclick='newIframe("https://www.merriam-webster.com/word-of-the-day");'>GO</button></summary>For those (me) who enjoy expanding their vocabulary.</details>
+    </div>
+    <script>
           //https://www.coolmathgames.com/sites/default/files/public_games/49091/
           //https://scratch.mit.edu/projects/1054544741/embed/
           //may 9 2019
+          //https://www.coolmathgames.com/sites/default/files/public_games/24012/ awesome tanks 2
+          //https://www.coolmathgames.com/sites/default/files/public_games/48573/ awesome tanks 1
+          //https://www.coolmathgames.com/sites/default/files/public_games/40444/?gd_sdk_referrer_url=https%3A%2F%2Fwww.coolmathgames.com%2F0-asteroids asteroids
+          // learn to fly https://www.coolmathgames.com/sites/default/files/public_games/50509/
+          // run 3 https://www.coolmathgames.com/sites/default/files/public_games/33059/
+         // https://www.coolmathgames.com/sites/default/files/public_games/26348/ moto x3m pool
+         //https://www.coolmathgames.com/sites/default/files/public_games/50678/ learn to fly 2
           var currentIndex = 0;
           var newIframeInput = function(){
             newIframeBase(document.getElementById('name').value);
@@ -216,24 +191,23 @@
     return false;  
   }
 
-  return url.protocol === "http:" || url.protocol === "https:";
+  return url.protocol === "http:" || url.protocol === "https:"||url.protocol === "data:"||url.protocol === "view-source:"||url.protocol ==="blob:";
 }
 
           var newIframe = function(url){newIframeBase(url)}
           var newIframeBase = function(url){
             if(isValidHttpUrl(url)){
-            var j = currentIndex.toString().concat("main");
             var x = document.getElementById('activeFrames');
             var y = document.getElementById('buttonBar');
             ifram = document.createElement('IFRAME');
             ifram.setAttribute("src",url);
-            ifram.setAttribute("id",j);
+            ifram.setAttribute('class','frameZoom');
             but = document.createElement('BUTTON');
             but.textContent = "Fullscreen"
             but.setAttribute("class","fullscreen");
             closer = document.createElement('BUTTON');
             closer.textContent = "Close"
-            closer.setAttribute("class", "close");
+            closer.setAttribute("class", "close fader");
             closer.setAttribute("id",j);
             //console.log(currentIndex);
             //console.log(j);
@@ -251,14 +225,22 @@
             currentIndex+=1;
             currentBut.addEventListener('click',function(){
                 index = (Array.prototype.indexOf.call(y.children, this))/2;
+                zoom = x.childNodes[index].getAnimations()[0];
                 if(currentBut.textContent==='Fullscreen'){
+                    document.getElementsByTagName("html")[0].scroll({top:0,left:0,behavior:"smooth"})
                     currentBut.textContent = "Exit fullscreen";
-                    currentBut.setAttribute('style','margin-left:0px;position:absolute;top:10px;left:10px;');
-                    x.childNodes[index].setAttribute('style','position:absolute;top:0px;left:0px;width:100%;height:100%;');
+                    currentBut.setAttribute('style','margin-left:0px;position:absolute;top:10px;left:10px;z-index:2;');
+                    zoom.currentTime = 0;
+                    zoom.play();
+                    setTimeout(()=>{zoom.reverse();zoom.pause(); zoom.currentTime = 999;},999);
+                    document.getElementsByTagName("body")[0].setAttribute('style',"overflow-y:hidden");
+                    document.getElementById("name").setAttribute('placeholder','');
                 }else{
-                    
+                    document.getElementById("name").setAttribute('placeholder','https://example.com');
+                    document.getElementsByTagName("body")[0].setAttribute('style','');
                     currentBut.setAttribute("style","");
-                    x.childNodes[index].setAttribute("style","");
+                    zoom.play();
+                    setTimeout(()=>{zoom.reverse();zoom.pause();zoom.currentTime=0;},999)
                     currentBut.textContent = "Fullscreen";
                 }
             })
@@ -287,16 +269,20 @@
               navigator.clipboard.writeText(text);
               alert("Successfully copied link to clipboard!");
           }
-          details = document.getElementById('');
-          for(var j = 0; j < document.getElementsByClassName('expand').length; j++){
-            details = document.getElementsByClassName('expand')[j];
+          for(var j = 0; j < document.getElementsByTagName('details').length; j++){
+            details = document.getElementsByTagName('details')[j];
+            details.className = "dropper";
+            details.style = "animation-delay:"+j/document.getElementsByTagName('details').length+"s, 1s";
             details.addEventListener("toggle", function(){
                 if (this.open) {
-                    //this.setAttribute('style','border-bottom:black solid 2px;margin-bottom:0px;');
-                    this.childNodes[0].setAttribute('style','margin-bottom:10px;')
+                    //this.setAttribute('style','border-bottom:red solid 2px;margin-bottom:40px;');
+                    //slider = this.getAnimations()[1];
+                    //slider.play();
+                    //setTimeout(()=>{slider.reverse(); slider.pause();},999);
+                    this.childNodes[0].setAttribute('style','margin-bottom:10px;');
                 }else {
                     //this.setAttribute('style','border-bottom:black solid 0px;margin-bottom:0px;');
-                    this.childNodes[0].setAttribute('style','margin-bottom:-11px')
+                    this.childNodes[0].setAttribute('style','margin-bottom:-11px');
                 }
             });
           }
@@ -304,15 +290,6 @@
 
           
       </script>
-
-     <!-- <iframe
-  id="inlineFrameExample"
-  title="Inline Frame Example"
-  width=100%
-  height=1000
-  src="https://www.openstreetmap.org/export/embed.html?bbox=-0.004017949104309083%2C51.47612752641776%2C0.00030577182769775396%2C51.478569861898606&amp;layer=mapnik">
-</iframe>
--->
     <p></p>
   </body>
     <footer>
