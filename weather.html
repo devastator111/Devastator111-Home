@@ -14,23 +14,23 @@
     </nav>
   </head>
   <body>
-    <script src='https://github.com/devastator111/Devastator111-Home/blob/0088d967358df1461bfe6effc9b3b4da1cbd9c3d/Scripts/countDown.js'></script>
+    <script src='scripts/countDown.js'></script>
     <div id="holder">
         
     </div>
     <div id="audiobar">
         <span id="title"></span>
         <span id="time"></span><br>
-        <button onclick="queue.prevSong()" style="width:40px;height:20px;position:relative;top:2px;margin-left:0px;margin-top:0px;"><img src="imageAssets/previous.png" style="width:15px"></button>
-        <button onclick="toggleAudio()" style="width:40px;height:20px;margin:0px;position:relative;top:10px;left:6px"><img src="https://static.thenounproject.com/png/654632-200.png" width=23 style="position:relative;top:-3px;left:0px;"></button>
-        <button onclick="queue.nextSong()" style="padding:0px;width:40px;height:20px;top:5px;position:relative;"><img src="imageAssets/FF.webp" style="width:19px; margin:0px;"></button>
+        <button onclick="queue.prevSong()" style="width:40px;height:20px;position:relative;top:2px;margin-left:0px;margin-top:0px;"><img src="images/previous.png" style="width:15px"></button>
+        <button onclick="toggleAudio()" style="width:40px;height:20px;margin:0px;position:relative;top:10px;left:6px"><img src="images/paused.png" width=23 style="position:relative;top:-3px;left:0px;"></button>
+        <button onclick="queue.nextSong()" style="padding:0px;width:40px;height:20px;top:5px;position:relative;"><img src="images/fastFoward.webp" style="width:19px; margin:0px;"></button>
 
         <br>
         <button onclick="queue.addSong(false)" style="margin:auto">Add Song To Queue</button>
         <button onclick="queue.swapSong()" style="margin:auto">Change Song</button>
         <button onclick="queue.clearSongs()" style="margin:auto;">Clear Queue</button>
     </div>
-    <script src="https://github.com/devastator111/Devastator111-Home/blob/0088d967358df1461bfe6effc9b3b4da1cbd9c3d/Scripts/audio.js"></script>
+    <script src="scripts/audio.js"></script>
     <h1>Weekly Forecast</h1>
     <hr> 
     <div id="conditions">
@@ -43,7 +43,7 @@
       </ul>
     </div>
     <p id='replaceMe'>Weather did not pull.</p>
-    <img id='image' src='https://www.kasandbox.org/programming-images/landscapes/clouds-from-plane.png'>
+    <img id='image' src='images/clouds.JPG'>
     <style>
       @import url('global.css');
       div h3{
