@@ -173,39 +173,28 @@
                 console.error('Error:', data, error);
             });
             }
-        switch(0){
-            case 0: 
-              getApi("https://api.weather.com/v3/wx/forecast/daily/5day?geocode=34.86943857927993,-120.43803280572449&format=json&units=e&language=en-US&apiKey=78ee0d84473a4c60ae0d84473a4c606c",(data)=>{
+              getApi("https://api.weather.gov/gridpoints/LOX/83,95/forecast",(data)=>{
                 var forecastNodes = [];
-                for(var i=0;i<data.daypart[0].narrative.length;i++){
-                    if(data.daypart[0].narrative[i]!=null){
-                        day = document.createElement("div");
-                        day.class = "forecastDay";
-                        day.style = "background-image:url("+icons[data.daypart[0].iconCode[i]]+"),radial-gradient(circle at center, darkgray 0,#00000020 100%);background-repeat:no-repeat;background-position:center;";
-                        header = document.createElement("h2");
-                        header.textContent = data.daypart[0].daypartName[i];                        
-                        day.appendChild(header)
-                        day.appendChild(document.createTextNode(data.daypart[0].narrative[i]));     
-                        forecastNodes.push(day);
-                    }
+                for(var i=0;i<data.properties.periods.length;i++){
+                  currentDay = data.properties.periods[i];
+                  if(currentDay!=null){
+                      day = document.createElement("div");
+                      day.class = "forecastDay";
+                      day.style = "background-image:radial-gradient(circle at center, darkgray 0,#00000020 100%);background-repeat:no-repeat;background-position:center;";
+                      day.title = currentDay.shortForecast;
+                      header = document.createElement("h2");
+                      header.textContent = currentDay.name;                        
+                      day.appendChild(header);
+                      var content = currentDay.detailedForecast;
+                      if(!content.includes("wind")){
+                        content = content.concat(" Wind at "+currentDay.windSpeed + " " + currentDay.windDirection)
+                      }
+                      day.appendChild(document.createTextNode(content));     
+                      forecastNodes.push(day);
+                  }
                 }
                 document.getElementById('replaceMe').replaceChildren(...forecastNodes);
               })
-              break;
-            case 1:
-              getApi("https://api.weather.gov/gridpoints/LOX/83,95/forecast",(data)=>{
-                forecastNode = document.createTextNode(data.properties.periods[0].detailedForecast);
-                document.getElementById('replaceMe').replaceChildren(forecastNode);
-              });
-              break;
-            default:
-              getApi("https://api.weather.gov/gridpoints/LOX/83,95/forecast",(data)=>{
-                forecastNode = document.createTextNode(data.properties.periods[0].detailedForecast);
-                document.getElementById('replaceMe').replaceChildren(forecastNode);
-              });
-              break;
-        }
-        //getApi("https://api.weather.com/v2/pws/observations/current?stationId=KCAORCUTT11&format=json&units=e&apiKey=78ee0d84473a4c60ae0d84473a4c606c",(data)=>{alert(data);alert(hello)})
         getApi("https://api.weather.gov/stations/KSMX/observations/latest",(data)=>{
             conditions = document.getElementById('conditions');
             //Parent list
@@ -258,16 +247,7 @@
             conditions.appendChild(list);
             conditions.appendChild(lastPull);
         });
-        
-          
-          
-          //KSMX
-                    // https://api.weather.com/v3/wx/forecast/daily/5day?geocode=34.86943857927993,-120.43803280572449&format=json&units=e&language=en-US&apiKey=78ee0d84473a4c60ae0d84473a4c606c
-                    // https://api.weather.gov/gridpoints/LOX/83,95/forecast
-                    // https://api.scratch.mit.edu/users/BlockCoder111/messages/count
-          //setInterval(getApi,60000,''//url param);
-      </script>
-      
+      </script>      
   </body>
     <footer>
         <hr>
