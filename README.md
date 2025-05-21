@@ -1,6 +1,7 @@
-# Devastator Home v0.5.1.a
-### <strong>Update Log</strong>
----
+<h1 align="center">Devastator Home v0.5.1.a</h1>
+
+<h2 align="center">Update Log</h2>
+
 5-18-25 Security Patch (v0.5.1.a):
 - Removed private API keys from weather page
 ---
@@ -43,7 +44,6 @@
   - Blue Orchid (The White Stripes)
 ---
 3-31-25 Feature Update (v0.1.0.a): 
-=======
 - Created update log.  
 - Added countdown.
 ---
