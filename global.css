@@ -5,7 +5,7 @@
 /*~Button:Hover~#ec8a00*/
 /*~Subtitle:~#001dab*/
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-@import url('https://fonts.googleapis.com/css2?family=Electrolize&family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
 :root{
     --bg-color:#d1d1d1;
     --secondary-bg-color:darkgray;
@@ -45,6 +45,13 @@
         transform:scale(1,1);
     }
 }
+::selection{
+    color:rgba(255, 255, 255, 0.75);
+    background-color:rgba(236, 138, 0, 0.68);
+}
+form::spelling-error, form::grammar-error{
+    text-decoration:none;
+}
 body{
     font-style: normal;
     background:var(--bg-color);
@@ -59,6 +66,12 @@ nav a{
     margin:0 0px 10px 0px;
     padding:15px;
     color:var(--subtitle-color);
+    transition: color 0.4s, background-color 0.4s;
+}
+nav a:hover{
+    transition:all 0.46s;
+    color:var(--bg-color);
+    background-color:var(--button-norm-color)
 }
 nav{
     background-color:darkgray;
