@@ -116,6 +116,7 @@
               border-radius:10px;
               margin-bottom:-11px;
               border:black solid 2px;
+              z-index:3;
           }
           ::placeholder{
             opacity:0.5;
@@ -133,7 +134,14 @@
           }
           details{
               padding-bottom:10px;
-              margin-bottom:0px;
+          }
+          ::details-content{
+              padding-top:0px;
+              text-indent:10px;
+          }
+          details[open]::details-content{
+              margin-top:10px;
+              height:auto;
           }
           details p{
               text-align:center;
@@ -141,6 +149,22 @@
           }
           .gcse-search{
               margin-bottom:-10px;
+          }
+          ::details-content {
+            transition: height 0.5s ease, content-visibility 0.5s ease allow-discrete,margin-top 0.5s ease;
+              height: 0;
+                overflow: clip;
+          }
+          @supports (interpolate-size: allow-keywords) {
+              :root {
+                  interpolate-size: allow-keywords;
+              }
+          }
+          @supports not (interpolate-size: allow-keywords) {
+              [open]::details-content {
+                  height: 150px;
+                  overflow-y: scroll; /* In case the contents should be taller than 150px */
+              }
           }
       </style>
       <h1 class='title'>Iframe Player</h1>

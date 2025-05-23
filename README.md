@@ -1,7 +1,11 @@
-<h1 align="center">Devastator Home v0.5.1.a</h1>
+<h1 align="center">Devastator Home v0.5.2.a</h1>
 
 <h2 align="center">Update Log</h2>
 
+5-22-25 Feature Update (v0.5.2.a):
+- Added animation to iframe link accordian
+- Animated navigation hyperlinks
+---
 5-18-25 Security Patch (v0.5.1.a):
 - Removed private API keys from weather page
 ---

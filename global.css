@@ -38,7 +38,7 @@
 @keyframes fade-in{
     from{
         opacity:0;
-        transform:scale(0.7,0.7);
+        transform:scale(1,0);
     }
     to{
         opacity:1;
@@ -128,6 +128,7 @@ button:hover{
 }
 
 #audiobar{
+    animation:drop-fade-in 0.7s forwards normal;
     background-color:var(--button-hover-color);
     position:fixed;
     top:81%;
@@ -142,7 +143,7 @@ button:hover{
     
 }
 #audiobar span{
-    font-weight:500;
+    font-weight:600;
 }
 #countbox{
     padding-top:5px;
