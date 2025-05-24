@@ -2,6 +2,9 @@
 
 <h2 align="center">Update Log</h2>
 
+5-23-25 Feature Update (v0.5.3.a):
+- Added Favicons
+---
 5-22-25 Feature Update (v0.5.2.a):
 - Added animation to iframe link accordian
 - Animated navigation hyperlinks
